@@ -54,7 +54,7 @@ SHS启动时，有一个重要的参数"spark.history.fs.logDirectory",这个就
 
 ## SHS工作流程
 
-<img src="../_image/SHS_工作流程.PNG" alt="SHS工作流程" width="600" height="400" />
+<img src="../_image/SHS_工作流程.png" alt="SHS工作流程" width="600" height="400" />
 
 上图是一个非常简洁的流程，在这里我们区分了SHS和Application web UI,这两个最简单的理解方式，SHS会对多有的application都有效，并且即使application结束了之后也可存在，而application web UI则只存在running期间，并且是从SparkContext启动的一个UI。
 
