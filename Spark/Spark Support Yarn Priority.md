@@ -125,7 +125,7 @@ Spark目前已经有了对于Yarn的priority官方支持，这里给出一个在
 ```
 
 ## 参考
-Yarn Capacity Scheduler: https://hadoop.apache.org/docs/r3.1.1/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html
-Yarn Fair Scheduler: https://hadoop.apache.org/docs/r3.1.1/hadoop-yarn/hadoop-yarn-site/FairScheduler.html
-Spark Jira: https://issues.apache.org/jira/browse/SPARK-10879
-Hadoop Yarn API: https://hadoop.apache.org/docs/r3.2.1/api/org/apache/hadoop/yarn/api/records/ApplicationSubmissionContext.html
+Yarn Capacity Scheduler: https://hadoop.apache.org/docs/r3.1.1/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html </br>
+Yarn Fair Scheduler: https://hadoop.apache.org/docs/r3.1.1/hadoop-yarn/hadoop-yarn-site/FairScheduler.html </br>
+Spark Jira: https://issues.apache.org/jira/browse/SPARK-10879 </br>
+Hadoop Yarn API: https://hadoop.apache.org/docs/r3.2.1/api/org/apache/hadoop/yarn/api/records/ApplicationSubmissionContext.html </br>
