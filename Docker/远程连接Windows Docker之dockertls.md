@@ -39,3 +39,7 @@ New-NetFirewallRule -DisplayName 'Docker SSL Inbound' -Profile @('Domain', 'Publ
 docker -H tcp://wsdockerhost.southcentralus.cloudapp.azure.com:2376 --tlsverify=0 version
 ```
 不出意外你就可以在上面敲打docker命令来操作host机器上的docker container了。
+
+## 参考
+https://docs.microsoft.com/en-us/virtualization/windowscontainers/management/manage_remotehost
+https://hub.docker.com/r/stefanscherer/dockertls-windows/
