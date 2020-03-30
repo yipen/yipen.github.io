@@ -7,8 +7,7 @@ https://idk.dev/best-practices-for-successfully-managing-memory-for-apache-spark
 | property name | Default | Meaning |
 | ------ | ------ | ------ |
 |spark.executor.memory| 1g | Amount of memory to use per executor process, in the same format as JVM memory strings with a size unit suffix ("k", "m", "g" or "t") (e.g. 512m, 2g). |
-|spark.driver.memory| 1g | Amount of memory to use for the driver process, i.e. where SparkContext is initialized, in the same format as JVM memory strings with a size unit suffix ("k", "m", "g" or "t") (e.g. 512m, 2g).
-Note: In client mode, this config must not be set through the SparkConf directly in your application, because the driver JVM has already started at that point. Instead, please set this through the --driver-memory command line option or in your default properties file.|
+|spark.driver.memory| 1g | Amount of memory to use for the driver process, i.e. where SparkContext is initialized, in the same format as JVM memory strings with a size unit suffix ("k", "m", "g" or "t") (e.g. 512m, 2g).Note: In client mode, this config must not be set through the SparkConf directly in your application, because the driver JVM has already started at that point. Instead, please set this through the --driver-memory command line option or in your default properties file.|
 |spark.executor.cores|1 in YARN mode, all the available cores on the worker in standalone and Mesos coarse-grained modes.|The number of cores to use on each executor. In standalone and Mesos coarse-grained modes|
 |spark.driver.cores|1|Number of cores to use for the driver process, only in cluster mode.|
 |spark.default.parallelism|For distributed shuffle operations like reduceByKey and join, the largest number of partitions in a parent RDD. For operations like parallelize with no parent RDDs, it depends on the cluster manager | Default number of partitions in RDDs returned by transformations like join, reduceByKey, and parallelize when not set by user.|
