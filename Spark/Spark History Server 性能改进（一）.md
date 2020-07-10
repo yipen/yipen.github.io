@@ -1,7 +1,7 @@
 ## Spark History Server的主页
 Spark History Server(SHS) 主页展示了一定时间内（spark.history.fs.cleaner.maxAge, default 7d）的所有的application列表，包含了applicationId, name, attemptId, start time, end time, duration, user, eventlog下载链接。</br>
 
-<img src="../_image/spark_home_page.PNG" alt="SHS主页" width="700" height="400" />
+<img src="../_image/spark_home_page.png" alt="SHS主页" width="700" height="400" />
 
 ## SHS如何生成app列表
 SHS是基于event log来生成application list，这就避免不了需要去SHS去读取和解析log。从代码里我们可以看到，需要解析：SparkListenerApplicationStart，SparkListenerApplicationEnd，SparkListenerEnvironmentUpdate，sparkVersion。
