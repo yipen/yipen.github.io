@@ -75,5 +75,40 @@ Shutdown hook now!
 
 ### Shutdown hook需要安全权限
 
+## Shutdown hook的应用实例
+在这里我们用Spark中的ApplicationMaster来做一个实例分析。</br>
+ApplicationMaster.scala
+```java
+// This shutdown hook should run *after* the SparkContext is shut down.
+      val priority = ShutdownHookManager.SPARK_CONTEXT_SHUTDOWN_PRIORITY - 1
+      ShutdownHookManager.addShutdownHook(priority) { () =>
+        val maxAppAttempts = client.getMaxRegAttempts(sparkConf, yarnConf)
+        val isLastAttempt = appAttemptId.getAttemptId() >= maxAppAttempts
+
+        if (!finished) {
+          // The default state of ApplicationMaster is failed if it is invoked by shut down hook.
+          // This behavior is different compared to 1.x version.
+          // If user application is exited ahead of time by calling System.exit(N), here mark
+          // this application as failed with EXIT_EARLY. For a good shutdown, user shouldn't call
+          // System.exit(0) to terminate the application.
+          finish(finalStatus,
+            ApplicationMaster.EXIT_EARLY,
+            "Shutdown hook called before final status was reported.")
+        }
+
+        if (!unregistered) {
+          // we only want to unregister if we don't want the RM to retry
+          if (finalStatus == FinalApplicationStatus.SUCCEEDED || isLastAttempt) {
+            unregister(finalStatus, finalMsg)
+            cleanupStagingDir(new Path(System.getenv("SPARK_YARN_STAGING_DIR")))
+          }
+        }
+```
+这段程序中，当application结束时需要删除stagingDir下的文件。这就是我们上文提到的shutdown hook常见用法。
+
+但在实际Spark application中，有时候会碰到application被kill或者异常退出的情况，这个时候去观察stagingDir会发现，application结束后它并没有被删除。因为当application被kill或者异常退出时，Yarn会发送SIGTERM，随后发送SIGKILL。shutdown hook需要在这两个操作中间完成，如果没有及时完成，就会导致shutdown hook里的删除stagingDir的操作没有完成。这个时间可以通过yarn.nodemanager.slepp-delay-before-sigkill.ms来设置。
+
+
+
 ## 参考
 http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/Runtime.html#addShutdownHook(java.lang.Thread)
